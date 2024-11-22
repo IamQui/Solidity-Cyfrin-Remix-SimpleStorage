@@ -1,0 +1,53 @@
+{
+	"compiler": {
+		"version": "0.8.28+commit.7893614a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "fund",
+				"outputs": [],
+				"stateMutability": "payable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/FundMe.sol": "FundMe"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/FundMe.sol": {
+			"keccak256": "0x931c68521bc6fe21f7fd85520b71d8d24a0627a8a6d5a947c398c0033a9de9de",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://665505dc3fb8b4af054d609f4566b3c40d009f7517e540b19e65c36119c31609",
+				"dweb:/ipfs/QmYqe5Xzx1RVPJgFRM5xKSA7RHGGaRPdVcpbVR1Mtejagb"
+			]
+		}
+	},
+	"version": 1
+}
