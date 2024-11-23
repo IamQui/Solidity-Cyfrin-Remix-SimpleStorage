@@ -11,6 +11,12 @@ contract FundMe {
     address[] public funders;
     mapping(address funder => uint256 amountFunded) public addressToAmountFunded;
 
+    address public owner;
+
+    constructor() {
+        owner = msg.sender;
+    }
+
     function fund() public payable {
         msg.value.getConversionRate();
         require(msg.value.getConversionRate() >= minimumUSD, "Didn't send enough ETH");
@@ -19,22 +25,23 @@ contract FundMe {
     }
 
     function withdraw() public {
+        require(msg.sender == owner, "Must Be Owner!");
         for(uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++){
             address funder = funders[funderIndex];
             addressToAmountFunded[funder] = 0;
 
         }
         funders = new address[](0);
+        // msg.sender = address
+        // payable(msg.sender) = payable address
 
         // to send ETH (or native currency): 3 ways
 
         // 1. transfer: (capped at 2300 gas, if more used, throws error)
-        // msg.sender = address
-        // payable(msg.sender) = payable address
         // payable(msg.sender).transfer(address(this).balance);
         // transfer automatically reverts if fails
 
-        // 2. send: (capped at 2300 gas, if more used, returns bool on if successful or not)
+        // 2. send: (capped at 2300 gas, if more used, returns bool if successful or not)
         // bool sendSuccess = payable(msg.sender).send(address(this).balance);
         // require(sendSuccess, "Send failed");
         // send will only revert if you add a require statement
