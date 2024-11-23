@@ -5,10 +5,10 @@ import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interf
 
 contract FundMe {
 
-    uint256 public minimumUSD = 5;
+    uint256 public minimumUSD = 5e18;
 
     function fund() public payable {
-        require(msg.value >= minimumUSD, "Didn't send enough ETH");
+        require(getConversionRate(msg.value) >= minimumUSD, "Didn't send enough ETH");
     }
 
     function getPrice() public view returns(uint256){
@@ -18,7 +18,11 @@ contract FundMe {
     }
     // Sepolia ETH/USD => 0x694AA1769357215DE4FAC081bf1f309aDC325306
 
-    function getConversionRate() public {}
+    function getConversionRate(uint256 ethAmount) public view returns(uint256){
+        uint256 ethPrice = getPrice();
+        uint256 ethAmountInUSD = (ethPrice * ethAmount) / 1e18;
+        return ethAmountInUSD;
+    }
 
     function getVersion() public view returns(uint256){
         return AggregatorV3Interface(0x694AA1769357215DE4FAC081bf1f309aDC325306).version();
