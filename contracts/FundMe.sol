@@ -3,6 +3,10 @@ pragma solidity ^0.8.24;
 
 import {PriceConverter} from "./PriceConverter.sol";
 
+
+
+error NotOwner();
+
 contract FundMe {
     // if variables are set once - there are ways to make them more gas efficent
     
@@ -70,7 +74,8 @@ contract FundMe {
     }
 
     modifier onlyOwner() {
-        require(msg.sender == i_owner, "Owner Only!");
+        //require(msg.sender == i_owner, "Owner Only!");
+        if(msg.sender != i_owner) { revert NotOwner(); }
         _;
     }
 }
