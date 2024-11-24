@@ -3,8 +3,6 @@ pragma solidity ^0.8.24;
 
 import {PriceConverter} from "./PriceConverter.sol";
 
-
-
 error NotOwner();
 
 contract FundMe {
@@ -15,6 +13,11 @@ contract FundMe {
 
     // immutable - variables set once outside the line they're declared 
     // naming convention = i_name
+
+    // immutable keyword - allows values to be set at runtime 
+    // i.e. during the initial contract deployment
+
+    // constant keyword - requires values to be set at compile time
 
     // before:
     // current gas: 890,395 gas
@@ -68,7 +71,7 @@ contract FundMe {
         // send will only revert if you add a require statement
 
         // 3. call: (forward all gas or set gas, returns bool)
-        (bool callSuccess, ) = payable(msg.sender).call{value: address(this).balance}("");
+        (bool callSuccess, /*second variable - not named because not needed*/) = payable(msg.sender).call{value: address(this).balance}("");
         require(callSuccess, "Call failed");
         // call function returns 2 variables
     }
@@ -77,5 +80,16 @@ contract FundMe {
         //require(msg.sender == i_owner, "Owner Only!");
         if(msg.sender != i_owner) { revert NotOwner(); }
         _;
+    }
+
+    // modifiers allow reusable code to be applied to functions
+    // reducing code duplication and improving readability.
+
+    receive() external payable {
+        fund();
+    }
+
+    fallback() external payable {
+        fund();
     }
 }
