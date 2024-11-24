@@ -4,26 +4,44 @@ pragma solidity ^0.8.24;
 import {PriceConverter} from "./PriceConverter.sol";
 
 contract FundMe {
+    // if variables are set once - there are ways to make them more gas efficent
+    
+    // constant - if you assign a variable once - outside a function & never change it
+    // naming convention = ALL_CAPS_WITH_UNDERSCORES
+
+    // immutable - variables set once outside the line they're declared 
+    // naming convention = i_name
+
+    // before:
+    // current gas: 890,395 gas
+    // transaction cost: 774,256 gas
+    // execution cost: 672,932 gas
+
+    // after: 
+    // current gas: 840,305 gas
+    // transaction cost: 730,700 gas
+    // execution cost: 630,124 gas
+
     using PriceConverter for uint256;
 
-    uint256 public minimumUSD = 5e18;
+    uint256 public constant MINIMUM_USD = 5e18;
 
     address[] public funders;
     mapping(address funder => uint256 amountFunded) public addressToAmountFunded;
 
-    address public owner;
+    address public immutable i_owner;
 
     constructor() {
-        owner = msg.sender;
+        i_owner = msg.sender;
     }
 
     function fund() public payable {
         msg.value.getConversionRate();
-        require(msg.value.getConversionRate() >= minimumUSD, "Didn't send enough ETH");
+        require(msg.value.getConversionRate() >= MINIMUM_USD, "Didn't send enough ETH");
         funders.push(msg.sender);
         addressToAmountFunded[msg.sender] += msg.value; 
     }
-    
+
     function withdraw() public onlyOwner {
         for(uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++){
             address funder = funders[funderIndex];
@@ -52,7 +70,7 @@ contract FundMe {
     }
 
     modifier onlyOwner() {
-        require(msg.sender == owner, "Owner Only!");
+        require(msg.sender == i_owner, "Owner Only!");
         _;
     }
 }
