@@ -1,0 +1,72 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "getStoredData",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_storedData",
+						"type": "uint256"
+					}
+				],
+				"name": "setStoredData",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/DataStorage.sol": "DataStorage"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/DataStorage.sol": {
+			"keccak256": "0x875bbb0508e1d1a26feaf5ae86ecbbc72c9152dbb96750def927d8e38627ec02",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://ae70ec48f12295fa69a3e6dd9faf8fba81eaebf6d90d8d0d4c073c3cbb760996",
+				"dweb:/ipfs/QmVcyQb7taee5qiVBBZb3eno4iaDgFVWrrt3oW4hi5pHT9"
+			]
+		}
+	},
+	"version": 1
+}

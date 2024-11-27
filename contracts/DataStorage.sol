@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.24;
+pragma solidity ^0.8.26;
+
 
 contract DataStorage {
     uint256 storedData;
 
-    function setTheStoredData(uint256 data) public {
-        storedData = data;
+    function setStoredData(uint256 _storedData) public {
+        storedData = _storedData;
     }
 
-    function getTheStoredData() public view returns(uint256){
+    function getStoredData() public view returns(uint256) {
         return storedData;
     }
-
 }
